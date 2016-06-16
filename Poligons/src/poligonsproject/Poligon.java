@@ -10,23 +10,23 @@ import static java.lang.Math.min;
 import java.util.ArrayList;
 import java.util.List;
 import poligonsproject.Poligon.Segment;
-import poligonsproject.Vertices.Vertice;
+import poligonsproject.Verticles.Vertice;
 
 /**
  *
  * @author дом
  */
-public class Poligon extends Vertices {
+public class Poligon extends Verticles {
 
-    public float getArea(List<Vertice> vertices) {
-        if (vertices.size() < 3) {
+    public float getArea(List<Vertice> verticles) {
+        if (verticles.size() < 3) {
             throw new IllegalArgumentException("List<Vertice> should be greater then 2");
         }
         float area = 0;
-        for (int i = 0; i < (vertices.size() - 1); i++) {
-            area += ((vertices.get(i).getX() + vertices.get(i + 1).getX()) * (vertices.get(i).getY() - vertices.get(i + 1).getY()));
+        for (int i = 0; i < (verticles.size() - 1); i++) {
+            area += ((verticles.get(i).getX() + verticles.get(i + 1).getX()) * (verticles.get(i).getY() - verticles.get(i + 1).getY()));
         }
-        area += ((vertices.get(vertices.size() - 1).getX() + vertices.get(0).getX()) * (vertices.get(vertices.size() - 1).getY() - vertices.get(0).getY()));
+        area += ((verticles.get(verticles.size() - 1).getX() + verticles.get(0).getX()) * (verticles.get(verticles.size() - 1).getY() - verticles.get(0).getY()));
         return Math.abs(area) / 2;
     }
 
@@ -34,6 +34,15 @@ public class Poligon extends Vertices {
         if (vertices1.size() < 3 || vertices2.size() < 3) {
             throw new IllegalArgumentException("List<Vertice> should be greater then 2");
         }
+        for (Vertice vertice:vertices1){
+        if (vertice==null)
+            throw new IllegalArgumentException("Elements <Vertice> not be null");
+        }
+        for (Vertice vertice:vertices2){
+        if (vertice==null)
+            throw new IllegalArgumentException("Elements <Vertice> not be null");
+        }
+        
         ArrayList<Segment> segments1 = new ArrayList<Segment>();
         for (int i = 0; i < vertices1.size() - 1; i++) {
             segments1.add(new Segment(vertices1.get(i), vertices1.get(i + 1)));
